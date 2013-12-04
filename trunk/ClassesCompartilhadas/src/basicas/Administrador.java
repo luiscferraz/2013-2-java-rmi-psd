@@ -1,5 +1,7 @@
 package basicas;
 
+//	Comentario
+
 public class Administrador {
 	String cpf;
 	String senha;
