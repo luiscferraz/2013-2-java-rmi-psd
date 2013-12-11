@@ -30,7 +30,7 @@ public class BancoDadosServidorCentral {
 		return clienteDao.getCliente(cpf);
 	}
 	
-	public void atulizarCliente(basicas.Cliente clienteAtualizado) throws ClassNotFoundException, SQLException {
+	public void atualizarCliente(basicas.Cliente clienteAtualizado) throws ClassNotFoundException, SQLException {
 		clienteDao.atualizar(clienteAtualizado);
 	}
 	
