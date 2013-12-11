@@ -10,12 +10,12 @@ import servidor.ServidorConsultaIndicesREST;
 public class ServidorIndices {
 
 	private ServidorConsultaIndices servidorConsultaIndices;
-	private ServidorConsultaIndicesREST servidorConsultaIndicesREST;
+	// private ServidorConsultaIndicesREST servidorConsultaIndicesREST;
 	
 	public ServidorIndices() {
 		try {
 			this.servidorConsultaIndices = new ServidorConsultaIndices();
-			this.servidorConsultaIndicesREST = new ServidorConsultaIndicesREST();
+			// this.servidorConsultaIndicesREST = new ServidorConsultaIndicesREST();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
