@@ -1,8 +1,13 @@
 package dados;
 
-import java.sql.SQLException;
+import interfaces.IBancoDeDadosServidorCentral;
 
-public class BancoDadosServidorCentral {
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import basicas.Cliente;
+
+public class BancoDadosServidorCentral  implements IBancoDeDadosServidorCentral {
 
 	private static BancoDadosServidorCentral instancia;
 	private IClienteDao clienteDao;
@@ -22,32 +27,44 @@ public class BancoDadosServidorCentral {
 		return instancia;
 	}
 	
+	@Override
 	public void inserirCliente(basicas.Cliente cliente) throws ClassNotFoundException, SQLException {
 		clienteDao.inserir(cliente);
 	}
 	
+	@Override
 	public basicas.Cliente getCliente(String cpf) throws ClassNotFoundException, SQLException {
 		return clienteDao.getCliente(cpf);
 	}
 	
+	@Override
+	public ArrayList<Cliente> getClientes() throws ClassNotFoundException, SQLException {
+		return clienteDao.getClientes();
+	}
+	
+	@Override
 	public void atualizarCliente(basicas.Cliente clienteAtualizado) throws ClassNotFoundException, SQLException {
 		clienteDao.atualizar(clienteAtualizado);
 	}
 	
+	@Override
 	public void inserirCartao(basicas.Cartao cartao) throws ClassNotFoundException, SQLException {
 		cartaoDao.inserir(cartao);
 	}
 	
+	@Override
 	public basicas.Cartao getCartao(String numero) throws ClassNotFoundException, SQLException {
 		return cartaoDao.getCartao(numero);
 	}
 	
+	@Override
 	public void atualizarCartao(basicas.Cartao cartaoAtualizado) throws ClassNotFoundException, SQLException {
 		cartaoDao.atualizar(cartaoAtualizado);
 	}
 	
+	@Override
 	public basicas.Administrador getAdministrador(String cpf) throws ClassNotFoundException, SQLException {
 		return administradorDao.getAdministrador(cpf);
 	}
-	
+
 }
