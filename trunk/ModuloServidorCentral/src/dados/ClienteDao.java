@@ -3,11 +3,14 @@ package dados;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import basicas.Cliente;
 
 public class ClienteDao implements IClienteDao {
 
 	@Override
-	public void inserir(basicas.Cliente cliente) throws ClassNotFoundException, SQLException {
+	public void inserir(Cliente cliente) throws ClassNotFoundException, SQLException {
 		if(!existe(cliente.getCpf())) {
 			String sql = "INSERT INTO cliente (cpf, nome, sobrenome, senha) VALUES (?, ?, ?, ?);";
 			
@@ -41,8 +44,8 @@ public class ClienteDao implements IClienteDao {
 	}
 	
 	@Override
-	public basicas.Cliente getCliente(String cpf) throws ClassNotFoundException, SQLException {
-		basicas.Cliente cliente = null;
+	public Cliente getCliente(String cpf) throws ClassNotFoundException, SQLException {
+		Cliente cliente = null;
 		
 		String sql = "SELECT * FROM cliente WHERE cliente.cpf = ?;";
 		PreparedStatement stm = FabricaConexao.obterConexao().prepareStatement(sql);
@@ -51,7 +54,7 @@ public class ClienteDao implements IClienteDao {
 		ResultSet rs = stm.executeQuery();
 		
 		if(rs.next()) {
-			cliente = new basicas.Cliente(rs.getString("nome"), rs.getString("sobrenome"), 
+			cliente = new Cliente(rs.getString("nome"), rs.getString("sobrenome"), 
 					rs.getString("cpf"), rs.getString("senha"));
 		}
 		
@@ -60,9 +63,27 @@ public class ClienteDao implements IClienteDao {
 		
 		return cliente;
 	}
+	
+	@Override
+	public ArrayList<Cliente> getClientes() throws ClassNotFoundException, SQLException {
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		
+		String sql = "SELECT * FROM cliente;";
+		
+		ResultSet rs = FabricaConexao.obterConexao().prepareStatement(sql).executeQuery();
+		
+		while(rs.next()) {
+			clientes.add(new Cliente(rs.getString("nome"), rs.getString("sobrenome"), 
+					rs.getString("cpf"), rs.getString("senha")));
+		}
+		
+		rs.close();
+		
+		return clientes;
+	}
 
 	@Override
-	public void atualizar(basicas.Cliente clienteAtualizado) throws ClassNotFoundException, SQLException {
+	public void atualizar(Cliente clienteAtualizado) throws ClassNotFoundException, SQLException {
 		if(existe(clienteAtualizado.getCpf())) {
 			String sql = "UPDATE cliente SET nome = ?, sobrenome = ?, senha = ? WHERE cpf = ?;";
 			

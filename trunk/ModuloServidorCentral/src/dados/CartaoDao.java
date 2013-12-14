@@ -4,10 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import basicas.Cartao;
+
 public class CartaoDao implements ICartaoDao {
 
 	@Override
-	public void inserir(basicas.Cartao cartao) throws ClassNotFoundException, SQLException {
+	public void inserir(Cartao cartao) throws ClassNotFoundException, SQLException {
 		if(!existe(cartao.getNumero())) {
 			String sql = "INSERT INTO cartao VALUES (?, ?, ?, ?, ?);";
 			
@@ -43,8 +45,8 @@ public class CartaoDao implements ICartaoDao {
 	}
 
 	@Override
-	public basicas.Cartao getCartao(String numeroCartao) throws ClassNotFoundException, SQLException {
-		basicas.Cartao cartao = null;
+	public Cartao getCartao(String numeroCartao) throws ClassNotFoundException, SQLException {
+		Cartao cartao = null;
 		
 		String sql = "SELECT * FROM cartao WHERE cartao.numero = ?;";
 		
@@ -54,7 +56,7 @@ public class CartaoDao implements ICartaoDao {
 		ResultSet rs = stm.executeQuery();
 		
 		if(rs.next()) {
-			cartao = new basicas.Cartao(rs.getString("numero"), rs.getString("cpf_cliente"), 
+			cartao = new Cartao(rs.getString("numero"), rs.getString("cpf_cliente"), 
 					rs.getString("validade"), rs.getString("cvv"), rs.getString("senha"));
 		}
 		
@@ -65,7 +67,7 @@ public class CartaoDao implements ICartaoDao {
 	}
 
 	@Override
-	public void atualizar(basicas.Cartao cartaoAtualizado) throws ClassNotFoundException, SQLException {
+	public void atualizar(Cartao cartaoAtualizado) throws ClassNotFoundException, SQLException {
 		if(existe(cartaoAtualizado.getNumero())) {
 			String sql = "UPDATE cartao SET cpf_cliente = ?, validade = ?, cvv = ?, senha = ?"
 					+ " WHERE numero = ?;";

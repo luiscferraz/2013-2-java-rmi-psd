@@ -2,6 +2,10 @@ package dados;
 
 import java.sql.SQLException;
 
+import basicas.Administrador;
+
 public interface IAdministradorDao {
-	public basicas.Administrador getAdministrador(String cpf) throws ClassNotFoundException, SQLException;
+	
+	public Administrador getAdministrador(String cpf) throws ClassNotFoundException, SQLException;
+	
 }
