@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import basicas.Administrador;
@@ -8,14 +9,14 @@ import basicas.Cliente;
 
 public interface IBancoDeDadosServidorCentral {
 	// metodos para cadastro de clientes
-	public void inserirCliente(Cliente novoCliente);
-	public Cliente getCliente(String cpf);
-	public ArrayList<Cliente> getClientes(); 
-	public void atualizarCliente(Cliente clienteAtualizado);
+	public void inserirCliente(Cliente novoCliente) throws ClassNotFoundException, SQLException;
+	public Cliente getCliente(String cpf) throws ClassNotFoundException, SQLException;
+	public ArrayList<Cliente> getClientes() throws ClassNotFoundException, SQLException; 
+	public void atualizarCliente(Cliente clienteAtualizado) throws ClassNotFoundException, SQLException;
 	// metodos para o cadastro de administrador
-	Administrador getAdministrador(String cpf);
+	Administrador getAdministrador(String cpf) throws ClassNotFoundException, SQLException;
 	// metodos para o cadastro de cartoes
-	public void inserirCartao(Cartao novoCartao);
-	public Cartao getCartao(String numeroCartao);
-	public void atualizarCartao(Cartao cartaoAtualizado);
+	public void inserirCartao(Cartao novoCartao) throws ClassNotFoundException, SQLException;
+	public Cartao getCartao(String numeroCartao) throws ClassNotFoundException, SQLException;
+	public void atualizarCartao(Cartao cartaoAtualizado) throws ClassNotFoundException, SQLException;
 }
