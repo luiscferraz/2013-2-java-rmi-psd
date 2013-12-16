@@ -1,0 +1,167 @@
+package gui;
+
+import interfaces.IServidorAdministrador;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Scanner;
+
+public class SoftwareAdministrador {
+	
+	static Scanner oScanner = new Scanner(System.in);
+	static IServidorAdministrador oIServidorAdministrador = null; 
+	static Registry oRegistry = null;
+	static boolean logado = false;
+	static String host = "";
+	
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		SoftwareAdministrador.oRegistry = LocateRegistry.getRegistry(SoftwareAdministrador.host, Registry.REGISTRY_PORT);
+		SoftwareAdministrador.oIServidorAdministrador = (IServidorAdministrador) oRegistry.lookup("ServidorAdministrador");
+		Integer ver = null;
+		
+		while(true){
+			System.out.println("*** Software Administrador ***");
+			while(!SoftwareAdministrador.logado){
+				SoftwareAdministrador.logado = menuLogar();
+			}
+			while(SoftwareAdministrador.logado){
+				switch(ver){
+					case 1:
+						SoftwareAdministrador.menuConsultarClientes();
+						ver = null;
+						break;
+					case 2:
+						SoftwareAdministrador.menuConsultarCartoes();
+						ver = null;
+						break;
+					case 3:
+						SoftwareAdministrador.menuCadastrarCliente();
+						ver = null;
+						break;
+					case 4:
+						SoftwareAdministrador.menuCadastrarCartao();
+						ver = null;
+						break;
+					case 0:
+						SoftwareAdministrador.logado = false;
+						break;
+					default:
+						ver = SoftwareAdministrador.menuPrincipal();
+				}
+			}
+		}
+
+	}
+	private static boolean menuLogar(){
+		System.out.print("\nCPF: ");
+		String verCPF = SoftwareAdministrador.oScanner.next();
+		System.out.print("Senha: ");
+		String verSenha= SoftwareAdministrador.oScanner.next();
+		
+		try {
+			
+			if (SoftwareAdministrador.oIServidorAdministrador.logar(verCPF, verSenha)) {
+				System.out.println("Login efetuado com sucesso!");
+				return true;
+			} else {
+				System.out.println("*Nao foi possovel efetuar login!");
+				return false;
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("*Erro ao logar: " + e.getMessage());
+		}
+		
+	}
+	private static Integer menuPrincipal(){
+		
+		System.out.println("\nEscolha uma opcao:");
+		System.out.println("1 - Consultar Clientes");
+		System.out.println("2 - Consultar Cartoes");
+		System.out.println("3 - Cadastrar Cliente");
+		System.out.println("4 - Cadastrar Cartao");
+		System.out.println("0 - Sair");
+		System.out.println("Digite:");
+		
+		String verTexto = SoftwareAdministrador.oScanner.next();
+		try{
+			return Integer.parseInt(verTexto);
+		}catch (Exception e){
+			System.out.println("*Erro: valor incorreto!");
+			return null;
+		}
+		
+		
+	}
+	private static void menuConsultarClientes(){
+		System.out.print("\nCPF do cliente: ");
+		String verCpf = SoftwareAdministrador.oScanner.next();
+		try {
+			String verConsultarCliente = SoftwareAdministrador.oIServidorAdministrador.consultarCliente(verCpf);
+			
+			if (verConsultarCliente == null) {
+				System.out.println("*CPF invalido!");
+			} else {
+				System.out.println("Cliente: \n" + verConsultarCliente);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("*Erro ao consultar cliente: " + e.getMessage());
+		}
+	}
+	private static void menuConsultarCartoes(){
+		System.out.print("\nNumero do Cartao: ");
+		String verNumCartao = SoftwareAdministrador.oScanner.next();
+		try {
+			String verConsultarCartao = SoftwareAdministrador.oIServidorAdministrador.consultarCartao(verNumCartao);
+			
+			if (verConsultarCartao == null) {
+				System.out.println("*Numero do cartao invalido!");
+			} else {
+				System.out.println("Cartao: \n" + verConsultarCartao);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("*Erro ao consultar cartao: " + e.getMessage());
+		}
+	}
+	private static void menuCadastrarCliente(){
+		System.out.print("\nNome: ");
+		String verNome = SoftwareAdministrador.oScanner.next();
+		System.out.print("\nSobrenome: ");
+		String verSobrenome = SoftwareAdministrador.oScanner.next();
+		System.out.print("\nCPF: ");
+		String verCpf = SoftwareAdministrador.oScanner.next();
+		System.out.print("\nSenha: ");
+		String verSenha = SoftwareAdministrador.oScanner.next();
+		try {
+			if (SoftwareAdministrador.oIServidorAdministrador.cadastrarCliente(verNome, verSobrenome, verCpf, verSenha)) {
+				System.out.println("Cliente Casdatrado com sucesso!");
+			} else {
+				System.out.println("*Erro: cliente ja existe!");
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("*Erro ao tentar cadastrar um cliente: " + e.getMessage());
+		}
+	}
+	private static void menuCadastrarCartao(){
+		System.out.print("\nCPF: ");
+		String verCpf = SoftwareAdministrador.oScanner.next();
+		System.out.print("\nNumero do cartao: ");
+		String verNum = SoftwareAdministrador.oScanner.next();
+		System.out.print("\nValidade: ");
+		String verValidade = SoftwareAdministrador.oScanner.next();
+		System.out.print("\nCVV: ");
+		String verCvv = SoftwareAdministrador.oScanner.next();
+		System.out.print("\nSenha: ");
+		String verSenha = SoftwareAdministrador.oScanner.next();
+		try {
+			if (SoftwareAdministrador.oIServidorAdministrador.cadastrarCartao(verCpf, verNum, verValidade, verCvv, verSenha)) {
+				System.out.println("Cartao Casdatrado com sucesso!");
+			} else {
+				System.out.println("*Erro: cartao ja existe!");
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("*Erro ao tentar cadastrar um cartao: " + e.getMessage());
+		}
+	}
+
+}
