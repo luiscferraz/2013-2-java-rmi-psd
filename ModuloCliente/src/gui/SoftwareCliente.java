@@ -1,11 +1,11 @@
-package src.gui;
+package gui;
 
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 
-import src.interfaces.IServidorCliente;
+import interfaces.IServidorCliente;
 
 public class SoftwareCliente {
 	static Scanner aScanner = new Scanner(System.in);
@@ -41,16 +41,16 @@ public class SoftwareCliente {
 						if (!aLogado) {
 							menuLogar();
 						} else {
-							System.out.println("*Login já foi efetuado");
+							System.out.println("*Login jï¿½ foi efetuado");
 						}
 					} else if (vMenuPrincipal == 4) {
 						System.out.println("Bye!");
 						break;
 					} else {
-						System.out.println("*Escolha uma opção válida");
+						System.out.println("*Escolha uma opï¿½ï¿½o vï¿½lida");
 					}
 				} catch (NumberFormatException e) {
-					System.out.println("*Formato inválido");
+					System.out.println("*Formato invï¿½lido");
 				}
 			}
 		} catch (Exception e) {
@@ -61,7 +61,7 @@ public class SoftwareCliente {
 	
 	private static int menuPrincipal() throws NumberFormatException
 	{
-		System.out.println("\nEscolha uma opção:");
+		System.out.println("\nEscolha uma opï¿½ï¿½o:");
 		System.out.println("1- Consultar Extrato");
 		System.out.println("2- Efetuar Pagamento");
 		System.out.println("3- Logar");
@@ -72,7 +72,7 @@ public class SoftwareCliente {
 	}
 	
 	private static void menuConsultarExtrato() {
-		System.out.print("\nNúmero do cartão: ");
+		System.out.print("\nNï¿½mero do cartï¿½o: ");
 		String vNumeroCartao = aScanner.next();
 		System.out.print("Senha: ");
 		String vSenha = aScanner.next();
@@ -80,7 +80,7 @@ public class SoftwareCliente {
 			String vConsultarExtrato = aIServidorCliente.consultarExtrato(vNumeroCartao, vSenha);
 			
 			if (vConsultarExtrato == null) {
-				System.out.println("*Número do cartão ou senha inválidos");
+				System.out.println("*Nï¿½mero do cartï¿½o ou senha invï¿½lidos");
 			} else {
 				System.out.println("Extrato: " + vConsultarExtrato);
 			}
@@ -90,7 +90,7 @@ public class SoftwareCliente {
 	}
 	
 	private static void menuEfetuarPagamento() {
-		System.out.print("\nNúmero do cartão: ");
+		System.out.print("\nNï¿½mero do cartï¿½o: ");
 		String vNumeroCartao = aScanner.next();
 
 		try {
@@ -99,7 +99,7 @@ public class SoftwareCliente {
 			if (vPagamentoEfetuado) {
 				System.out.println("Pagamento efetuado com sucesso!");
 			} else {
-				System.out.println("*Não foi possível efetuar pagamento");
+				System.out.println("*Nï¿½o foi possï¿½vel efetuar pagamento");
 			}
 		} catch (Exception e) {
 			throw new RuntimeException("*Erro ao efetuar pagamento: " + e.getMessage());
@@ -118,7 +118,7 @@ public class SoftwareCliente {
 			if (aLogado) {
 				System.out.println("Login efetuado com sucesso!");
 			} else {
-				System.out.println("*Não foi possível efetuar login");
+				System.out.println("*Nï¿½o foi possï¿½vel efetuar login");
 			}
 		} catch (Exception e) {
 			throw new RuntimeException("*Erro ao logar: " + e.getMessage());
