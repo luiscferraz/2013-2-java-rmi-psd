@@ -32,7 +32,13 @@ public class BancoDeDadosSPC implements IBancoDeDadosSPC{
 	 * @return Boolean
 	 */
 	public boolean eDevedor(String cpf){
-		return true;
+		ArrayList<String[]> result = banco.select();
+		for (int i = 0; i < result.size(); i = i+1){
+			if(result.get(i)[0].equals(cpf)){
+				return true;
+			}
+		}
+		return false;
 	};
 
 	/**

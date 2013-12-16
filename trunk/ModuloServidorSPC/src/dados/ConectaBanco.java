@@ -71,12 +71,16 @@ public class ConectaBanco {
 		
 			//Adicionar 
 			//devedores.add( new_point );
-			
+			boolean flag = false;
 			//Criar lista de devedores
 			for (int i = 0; i < devedores.size(); i = i+1){
-				if(devedores.get(i)[0] != cpf){
-					if(i == 0){
+				if(devedores.get(i)[0].equals(cpf)){
+					//Faz nada :)
+				}
+				else{
+					if(flag == false){
 						novos_devedores = devedores.get(i)[0] + "-" + devedores.get(i)[1];
+						flag = true;
 					}
 					else{
 						novos_devedores = novos_devedores +"%n"+ devedores.get(i)[0] + "-" +devedores.get(i)[1];
@@ -98,8 +102,6 @@ public class ConectaBanco {
 	 * @return Rank dos cinco primeiros em string
 	 */
 	public  ArrayList<String[]> select(){
-		
-		
 		File arq =  new File(this.nomeArq);		
 		 
 		if(arq.exists()){
@@ -107,17 +109,8 @@ public class ConectaBanco {
 			ArrayList<String[]> result = this.openArq(); //Rank Atual
 			
 			return result;
-			//Criar a lista dos cinco melhores para ser gravado no arquivo
-//			for (int i = 0; i < rank.size(); i = i+1){
-//				if(i == 0){
-//					rank_print = (i+1)+") "+rank.get(i)[0] + " - R$" + rank.get(i)[1];
-//				}
-//				else{
-//					rank_print = rank_print +"\n"+ (i+1)+") "+ rank.get(i)[0] + " - R$" + rank.get(i)[1];
-//				}
-//			}			
 		}
-		return null;		
+		return null;
 	}
 	
 	/**
