@@ -69,7 +69,8 @@ public class SoftwareAdministrador {
 				return false;
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("*Erro ao logar: " + e.getMessage());
+			System.out.println("*Erro ao logar: " + e.getMessage());
+			return false;
 		}
 		
 	}
@@ -121,7 +122,7 @@ public class SoftwareAdministrador {
 						System.out.println("Cliente: \n" + verConsultarCliente);
 					}
 				} catch (Exception e) {
-					throw new RuntimeException("*Erro ao consultar cliente: " + e.getMessage());
+					System.out.println("*Erro ao consultar cliente: " + e.getMessage());
 				}
 				break;
 			default:
