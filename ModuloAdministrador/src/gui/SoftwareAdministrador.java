@@ -87,25 +87,45 @@ public class SoftwareAdministrador {
 		try{
 			return Integer.parseInt(verTexto);
 		}catch (Exception e){
-			System.out.println("*Erro: valor incorreto!");
+			System.out.println("*Erro: valor invalido!\n");
 			return null;
 		}
 		
 		
 	}
 	private static void menuConsultarClientes(){
-		System.out.print("\nCPF do cliente: ");
-		String verCpf = SoftwareAdministrador.oScanner.next();
-		try {
-			String verConsultarCliente = SoftwareAdministrador.oIServidorAdministrador.consultarCliente(verCpf);
-			
-			if (verConsultarCliente == null) {
-				System.out.println("*CPF invalido!");
-			} else {
-				System.out.println("Cliente: \n" + verConsultarCliente);
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("*Erro ao consultar cliente: " + e.getMessage());
+		System.out.print("\n1 - Todos");
+		System.out.print("\n1 - Especifico");
+		String ver = SoftwareAdministrador.oScanner.next();
+		
+		switch(Integer.parseInt(ver)){
+		
+			case 1:
+				try {
+					String verConsultarClientes = SoftwareAdministrador.oIServidorAdministrador.consultarClientes();
+
+					System.out.println("Clientes: \n" + verConsultarClientes);
+				} catch (Exception e) {
+					throw new RuntimeException("*Erro ao consultar os clientes: " + e.getMessage());
+				}
+				break;
+			case 2:
+				System.out.print("\nCPF do cliente: ");
+				String verCpf = SoftwareAdministrador.oScanner.next();
+				try {
+					String verConsultarCliente = SoftwareAdministrador.oIServidorAdministrador.consultarCliente(verCpf);
+					
+					if (verConsultarCliente == null) {
+						System.out.println("*CPF invalido!");
+					} else {
+						System.out.println("Cliente: \n" + verConsultarCliente);
+					}
+				} catch (Exception e) {
+					throw new RuntimeException("*Erro ao consultar cliente: " + e.getMessage());
+				}
+				break;
+			default:
+				System.out.print("Valor invalido!");
 		}
 	}
 	private static void menuConsultarCartoes(){
