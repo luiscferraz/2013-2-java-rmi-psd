@@ -1,8 +1,10 @@
 package servidor;
 
+import interfaces.IServidorCadastroNegativo;
+
 import java.rmi.RemoteException;
 
-import interfaces.IServidorCadastroNegativo;
+import dados.BancoDeDadosSPC;
 
 public class ServidorCadastroNegativo implements IServidorCadastroNegativo {
 	BancoDeDadosSPC bancoSPC = new BancoDeDadosSPC();
