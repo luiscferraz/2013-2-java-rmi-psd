@@ -3,6 +3,7 @@
 	<name>ModuloServidorSPC</name>
 	<comment></comment>
 	<projects>
+		<project>ClassesCompartilhadas</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
