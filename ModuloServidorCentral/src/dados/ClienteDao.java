@@ -85,13 +85,14 @@ public class ClienteDao implements IClienteDao {
 	@Override
 	public void atualizar(Cliente clienteAtualizado) throws ClassNotFoundException, SQLException {
 		if(existe(clienteAtualizado.getCpf())) {
-			String sql = "UPDATE cliente SET nome = ?, sobrenome = ?, senha = ? WHERE cpf = ?;";
+			String sql = "UPDATE cliente SET nome = ?, sobrenome = ?, senha = ?, numero_cartao = ? WHERE cpf = ?;";
 			
 			PreparedStatement stm = FabricaConexao.obterConexao().prepareStatement(sql);
 			stm.setString(1, clienteAtualizado.getNome());
 			stm.setString(2, clienteAtualizado.getSobrenome());
 			stm.setString(3, clienteAtualizado.getSenha());
-			stm.setString(4, clienteAtualizado.getCpf());
+			stm.setString(4, clienteAtualizado.getNumeroDoCartao());
+			stm.setString(5, clienteAtualizado.getCpf());
 			stm.executeUpdate();
 			
 			stm.close();
