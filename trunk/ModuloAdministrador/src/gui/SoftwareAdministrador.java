@@ -8,16 +8,16 @@ import java.util.Scanner;
 
 public class SoftwareAdministrador {
 	
-	static Scanner oScanner = new Scanner(System.in);
-	static IServidorAdministrador oIServidorAdministrador = null; 
-	static Registry oRegistry = null;
-	static boolean logado = false;
-	static String host = "";
+	private static Scanner oScanner = new Scanner(System.in);
+	private static IServidorAdministrador oIServidorAdministrador = null; 
+	private static Registry oRegistry = null;
+	private static boolean logado = false;
+	private static String host = "172.16.181.128";
 	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		SoftwareAdministrador.oRegistry = LocateRegistry.getRegistry(SoftwareAdministrador.host, Registry.REGISTRY_PORT);
-		SoftwareAdministrador.oIServidorAdministrador = (IServidorAdministrador) oRegistry.lookup("ServidorAdministrador");
+		SoftwareAdministrador.oIServidorAdministrador = (IServidorAdministrador) SoftwareAdministrador.oRegistry.lookup("servidor_administrador");
 		Integer ver = null;
 		
 		while(true){
