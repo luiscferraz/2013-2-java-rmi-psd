@@ -5,11 +5,11 @@
 package basicas;
 
 public class Cliente {
-	String nome;
-	String sobrenome;
-	String cpf;
-	String senha;
-	String numeroDoCartao;
+	public String nome;
+	public String sobrenome;
+	public String cpf;
+	public String senha;
+	public String numeroDoCartao;
 	
 	public Cliente(){
 		
@@ -61,5 +61,12 @@ public class Cliente {
 
 	public void setNumeroDoCartao(String numeroDoCartao) {
 		this.numeroDoCartao = numeroDoCartao;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [nome=" + nome + ", sobrenome=" + sobrenome + ", cpf="
+				+ cpf + ", numeroDoCartao="
+				+ numeroDoCartao + "]";
 	}
 }

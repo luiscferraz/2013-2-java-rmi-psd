@@ -1,7 +1,5 @@
 package dados;
 
-import interfaces.IBancoDeDadosServidorCentral;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 

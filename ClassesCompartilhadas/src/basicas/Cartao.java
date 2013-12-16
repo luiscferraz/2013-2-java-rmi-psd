@@ -111,6 +111,11 @@ public class Cartao {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Cartao [cpf=" + cpf + ", numero=" + numero + ", validade="
+				+ validade + ", compras=" + compras + ", pagamentoEfetuado="
+				+ pagamentoEfetuado + "]";
+	}
 }
