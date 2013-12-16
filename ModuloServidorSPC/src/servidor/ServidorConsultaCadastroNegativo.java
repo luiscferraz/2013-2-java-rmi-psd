@@ -16,8 +16,21 @@ public class ServidorConsultaCadastroNegativo implements
 
 	@Override
 	public boolean eDevedor(String CPF) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		 if(bancoSPC.eDevedor(CPF)){
+             return true;
+     }else{
+             return false;
+     }
+}
+	
+	public boolean removerDevedor(String CPF) throws RemoteException{
+		if(bancoSPC.removerDevedor(CPF)){
+			return true;
+			
+		}else{
+			return false;
+		}
+		
 	}
 
 }
