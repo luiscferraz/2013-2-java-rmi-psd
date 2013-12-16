@@ -2,6 +2,7 @@ package cliente;
 
 import java.rmi.RemoteException;
 
+import basicas.Cartao;
 import basicas.Cliente;
 import dados.BancoDadosServidorCentral;
 import interfaces.IServidorCliente;
@@ -11,15 +12,21 @@ public class ServidorCliente implements IServidorCliente{
 	@Override
 	public String consultarExtrato(String numeroDoCartao, String senhaCartao)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		BancoDadosServidorCentral bncD = BancoDadosServidorCentral.obterInstancia();
+		Cartao ctr = bncD.getCartao(numeroDoCartao);
+		return ctr.getExtratoCompras();
+		
 	}
 
 	@Override
 	public boolean efetuarPagamento(String numeroDoCartao)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		BancoDadosServidorCentral bncD = BancoDadosServidorCentral.obterInstancia();
+		Cartao ctr = bncD.getCartao(numeroDoCartao);
+		ctr.efetuarPagamento();
+		return ctr.isPagamentoEfetuado();
+		
+		
 	}
 
 	@Override
