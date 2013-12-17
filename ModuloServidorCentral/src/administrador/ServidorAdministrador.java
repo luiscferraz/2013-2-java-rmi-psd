@@ -20,6 +20,19 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 	protected ServidorAdministrador() throws RemoteException {
 		super();
 	}
+	
+	public String consultarCliente(String cpf) throws RemoteException {
+		Cliente cliente = new Cliente();
+		BancoDadosServidorCentral varBDServerCentral = BancoDadosServidorCentral.obterInstancia();
+		
+		try {
+			cliente = varBDServerCentral.getCliente(cpf);
+			return cliente.toString();
+		} catch (Exception e) {
+			System.out.println("O cliente não foi encontrado.");		
+			return null;
+		} 
+	}
 
 
 	public String consultarClientes() throws RemoteException {
