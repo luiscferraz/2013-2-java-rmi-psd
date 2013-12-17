@@ -11,10 +11,11 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class SoftwareLojista {
 
 	private static Scanner jScanner = new Scanner(System.in);
-	private static IServidorAdministrador jIServidorAdministrador = null; 
+	private static IServidorLoja jIServidorLojista = null; 
 	
 	private static Registry jRegistry = null;
 	
@@ -26,8 +27,8 @@ public class SoftwareLojista {
 		// TODO Auto-generated method stub
 		try{
 			//exatamente igual ao que estava no slide
-			String objName = "rmi://localhost/administradorServer"; //TODO Confirmar nome do Server
-			jIServidorAdministrador = (IServidorAdministrador) Naming.lookup(objName);
+			String objName = "rmi://localhost/lojistaServer"; //TODO Confirmar nome do Server
+			jIServidorLojista = (IServidorLoja) Naming.lookup(objName);
 			
 			System.out.println("*** Software Lojista ***");		
 			jRegistry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
@@ -36,15 +37,12 @@ public class SoftwareLojista {
 			System.out.println("Problemas ao executar o lookup: " + e.getMessage());
 		}
 		
-		
-		
 	}
 	
 	private static Integer menuPrincipal(){		
 		System.out.println("\nEscolha uma opção:");
-		System.out.println("1 - Efetuar Venda.");
-		System.out.println("2 - Consultar SPC.");
-		System.out.println("3 - Consultar Devedores.");
+		System.out.println("1 - Consulta SPC.");
+		System.out.println("2 - Efetuar Venda.");
 		System.out.println("0 - Sair.");
 		System.out.println("Digite:");
 		
@@ -56,27 +54,6 @@ public class SoftwareLojista {
 			System.out.println("Opção inválida!\n");
 			return null;
 		}
-		
-		
-	}
-	
-	private static boolean menuLogar(){
-		System.out.println("CPF: ");
-		String vCPF = SoftwareLojista.jScanner.next();
-		System.out.print("Senha: ");
-		String vSenha= SoftwareLojista.jScanner.next();
-		
-		try {			
-			if (SoftwareLojista.jIServidorAdministrador.logar(vCPF, vSenha)) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			System.out.println("Erro ao tentar efetuar login: " + e.getMessage());
-			return false;
-		}
-		
 	}
 	
 	private static boolean ehDevedor(){
@@ -87,12 +64,45 @@ public class SoftwareLojista {
 	
 	}
 	
-	
-	
 	private static boolean efetuarVenda(){
-		return true;
+		System.out.print("\nInforme o numero do item a ser comprado: ");
+		
+		System.out.print("\n1. Revista - R$ 11.90\n2. DVD - R$ 29.90\n3. Porta-Retrato - R$ 45.20\n\n ");
+		String opcao = SoftwareLojista.jScanner.next();
+		
+		try {
+			float valor = 0;
+			String moeda = "Real";
+			
+			if (opcao == "1") {
+				valor = (float) 11.9;
+				moeda = "Real";
+			} else if (opcao == "2") {
+				valor = (float) 29.9;
+				moeda = "Real";
+			} else if (opcao == "3") {
+				valor = (float) 45.2;
+				moeda = "Real";
+			} else {
+				System.out.print("\nOpção incorreta: ");
+			}
+			
+			System.out.print("\nInforme o numero do cartao: ");
+			String cartao = SoftwareLojista.jScanner.next();
+			System.out.print("\nSenha: ");
+			String senha = SoftwareLojista.jScanner.next();
+			System.out.print("\nDescricao: ");
+			String descricao = SoftwareLojista.jScanner.next();
+			
+			if (SoftwareLojista.jIServidorLojista.realizarCompra(cartao, senha, descricao, valor, moeda)) {
+				System.out.println("Compra realizada com sucesso!");
+			} else {
+				System.out.println("*Erro na realização da compra!");
+			}
+			
+		} catch (Exception e) {
+			throw new RuntimeException("*Erro ao tentar realizar a compra: " + e.getMessage());
+		}
 	}
 	
-	
-
 }
