@@ -97,29 +97,13 @@ public class SoftwareLojista {
 	}
 	
 	private static boolean efetuarVenda(){
-
-		System.out.print("\nInforme o numero do item a ser comprado: ");
-		
-		System.out.print("\n1. Revista - R$ 11.90\n2. DVD - R$ 29.90\n3. Porta-Retrato - R$ 45.20\n\n ");
-		String opcao = SoftwareLojista.jScanner.next();
 		
 		try {
-			float valor = 0;
-			String moeda = "Real";
-			
-			if (opcao == "1") {
-				valor = (float) 11.9;
-				moeda = "Real";
-			} else if (opcao == "2") {
-				valor = (float) 29.9;
-				moeda = "Real";
-			} else if (opcao == "3") {
-				valor = (float) 45.2;
-				moeda = "Real";
-			} else {
-				System.out.print("\nOpção incorreta: ");
-			}
-			
+			System.out.print("\nInforme o valor da compra: ");
+			String valor = SoftwareLojista.jScanner.next();
+			float valorCompra = Float.parseFloat(valor);
+			System.out.print("\nInforme a moeda da compra: ");
+			String moeda = SoftwareLojista.jScanner.next();
 			System.out.print("\nInforme o numero do cartao: ");
 			String cartao = SoftwareLojista.jScanner.next();
 			System.out.print("\nSenha: ");
@@ -127,56 +111,17 @@ public class SoftwareLojista {
 			System.out.print("\nDescricao: ");
 			String descricao = SoftwareLojista.jScanner.next();
 			
-			if (SoftwareLojista.oIServidorLoja.realizarCompra(cartao, senha, descricao, valor, moeda)) {
-				System.out.println("Compra realizada com sucesso!");
-			} else {
-				System.out.println("*Erro na realização da compra!");
-			}
-			
-		} catch (Exception e) {
-			throw new RuntimeException("*Erro ao tentar realizar a compra: " + e.getMessage());
-		}
-
-		System.out.print("\nInforme o numero do item a ser comprado: ");
-		
-		System.out.print("\n1. Revista - R$ 11.90\n2. DVD - R$ 29.90\n3. Porta-Retrato - R$ 45.20\n\n ");
-		opcao = SoftwareLojista.jScanner.next();
-		
-		try {
-			float valor = 0;
-			String moeda = "Real";
-			
-			if (opcao == "1") {
-				valor = (float) 11.9;
-				moeda = "Real";
-			} else if (opcao == "2") {
-				valor = (float) 29.9;
-				moeda = "Real";
-			} else if (opcao == "3") {
-				valor = (float) 45.2;
-				moeda = "Real";
-			} else {
-				System.out.print("\nOpção incorreta: ");
-			}
-			
-			System.out.print("\nInforme o numero do cartao: ");
-			String cartao = SoftwareLojista.jScanner.next();
-			System.out.print("\nSenha: ");
-			String senha = SoftwareLojista.jScanner.next();
-			System.out.print("\nDescricao: ");
-			String descricao = SoftwareLojista.jScanner.next();
-			
-			if (SoftwareLojista.jIServidorLojista.realizarCompra(cartao, senha, descricao, valor, moeda)) {
+			if (SoftwareLojista.oIServidorLoja.realizarCompra(cartao, senha, descricao, valorCompra, moeda)) {
 				System.out.println("Compra realizada com sucesso!");
 				return true;
 			} else {
 				System.out.println("*Erro na realização da compra!");
+				return false;
 			}
 			
 		} catch (Exception e) {
 			throw new RuntimeException("*Erro ao tentar realizar a compra: " + e.getMessage());
 		}
-		return logado;
 		
 	}
 	
