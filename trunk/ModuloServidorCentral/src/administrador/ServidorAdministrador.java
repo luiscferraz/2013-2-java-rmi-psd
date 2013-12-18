@@ -17,7 +17,7 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 	
 	private static final long serialVersionUID = 1L;
 	
-	protected ServidorAdministrador() throws RemoteException {
+	public ServidorAdministrador() throws RemoteException {
 		super();
 	}
 	
@@ -29,7 +29,7 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 			cliente = varBDServerCentral.getCliente(cpf);
 			return cliente.toString();
 		} catch (Exception e) {
-			System.out.println("O cliente não foi encontrado.");		
+			System.out.println("O cliente nï¿½o foi encontrado.");		
 			return null;
 		} 
 	}
@@ -43,7 +43,7 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 			clientes = varBDServerCentral.getClientes();
 			return clientes.toString();
 		} catch (Exception e) {
-			System.out.println("Não há clientes cadastrados.");		
+			System.out.println("Nï¿½o hï¿½ clientes cadastrados.");		
 			return null;
 		} 
 	}
@@ -56,7 +56,7 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 			cartao = varBDServerCentral.getCartao(numeroDoCartao);
 			return cartao.toString();
 		} catch (Exception e) {
-			System.out.println("O cartão não foi encontrado.");		
+			System.out.println("O cartï¿½o nï¿½o foi encontrado.");		
 			return null;
 		} 
 	}
@@ -71,7 +71,7 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 			System.out.println("Cliente cadastrado com sucesso.");
 			return true;
 		} catch (Exception e) {
-			System.out.println("Não foi possivel cadastrar o cliente.");		
+			System.out.println("Nï¿½o foi possivel cadastrar o cliente.");		
 			return false;
 		} 
 	}
@@ -87,7 +87,7 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 			System.out.println("Cartao cadastrado com sucesso.");
 			return true;
 		} catch (Exception e) {
-			System.out.println("Não foi possivel cadastrar o cartao.");		
+			System.out.println("Nï¿½o foi possivel cadastrar o cartao.");		
 			return false;
 		} 
 	}
@@ -100,8 +100,8 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 			Administrador admin = new Administrador();
 			admin= varBDServerCentral.getAdministrador(cpf);
 			if (admin!=null){
-				if(senha==admin.getSenha()){
-					System.out.println("Usuário logado com sucesso.");		
+				if(senha.equals(admin.getSenha())){
+					System.out.println("Usuï¿½rio logado com sucesso.");		
 					return true;
 				}else{
 					System.out.println("Senha incorreta.");		
@@ -109,12 +109,12 @@ public class ServidorAdministrador extends UnicastRemoteObject implements IServi
 					
 				}
 			}else{
-				System.out.println("Usuário inexistente.");		
+				System.out.println("Usuï¿½rio inexistente.");		
 				return false;
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Não foi possível acesso ao sistema: ");		
+			System.out.println("Nï¿½o foi possï¿½vel acesso ao sistema: ");		
 			return false;
 		} 
 			
