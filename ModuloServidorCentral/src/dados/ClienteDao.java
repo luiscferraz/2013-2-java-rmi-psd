@@ -73,8 +73,11 @@ public class ClienteDao implements IClienteDao {
 		ResultSet rs = FabricaConexao.obterConexao().prepareStatement(sql).executeQuery();
 		
 		while(rs.next()) {
-			clientes.add(new Cliente(rs.getString("nome"), rs.getString("sobrenome"), 
-					rs.getString("cpf"), rs.getString("senha")));
+			Cliente c = new Cliente(rs.getString("nome"), rs.getString("sobrenome"), 
+					rs.getString("cpf"), rs.getString("senha"));
+			c.setNumeroDoCartao(rs.getString("numero_cartao"));
+			clientes.add(c);
+			
 		}
 		
 		rs.close();
