@@ -98,6 +98,7 @@ public class SoftwareAdministrador {
 	private static void menuConsultarClientes(){
 		System.out.print("\n1 - Todos");
 		System.out.print("\n1 - Especifico");
+		System.out.print("Digite: ");
 		String ver = SoftwareAdministrador.oScanner.next();
 		
 		switch(Integer.parseInt(ver)){
