@@ -13,18 +13,18 @@ public class ServidorSPC {
 	private ServidorConsultaCadastroNegativo servidorConsultaCadastroNegativo;
 	
 	ServidorSPC() {
-		try {
+		//try {
 			this.servidorCadastroNegativo = new ServidorCadastroNegativo();
-		} catch (RemoteException e) {
+		//} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
+			//e.printStackTrace();
+		//}
+		//try {
 			this.servidorConsultaCadastroNegativo = new ServidorConsultaCadastroNegativo();
-		} catch (RemoteException e) {
+		//} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			//e.printStackTrace();
+		//}
 	}
 
 	public static void main(String[] args) {

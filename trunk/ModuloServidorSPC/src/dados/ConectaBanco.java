@@ -2,7 +2,10 @@ package dados;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Formatter;
 
@@ -28,8 +31,9 @@ public class ConectaBanco {
 	 * se for será adicionada ao arquivo de recorde.
 	 * @param nome
 	 * @param pontos
+	 * @throws IOException 
 	 */
-	public void insert (String cpf, String valor){
+	public void insert (String cpf, String valor) {
 		
 		String[] new_point = {cpf, valor}; //Novos pontos adiconados ao sistema
 		String novos_devedores = null;
@@ -59,7 +63,7 @@ public class ConectaBanco {
 		}
 	}
 	
-	public boolean remove(String cpf){
+	public boolean remove(String cpf) {
 
 		String novos_devedores = null;
 		
@@ -100,8 +104,9 @@ public class ConectaBanco {
 	 * Responsavel por obter o rank atual do jogo, retornando em formato de string a classificação
 	 * dos cinco primeiros colocados
 	 * @return Rank dos cinco primeiros em string
+	 * @throws IOException 
 	 */
-	public  ArrayList<String[]> select(){
+	public  ArrayList<String[]> select() {
 		File arq =  new File(this.nomeArq);		
 		 
 		if(arq.exists()){
@@ -120,8 +125,9 @@ public class ConectaBanco {
 	 * Por fim, adiciona as 'Strings Array' em uma ArrayList.
 	 * 
 	 * @return Retorna uma ArrayList de Strings array.
+	 * @throws IOException 
 	 */
-	private ArrayList<String[]> openArq(){
+	private ArrayList<String[]> openArq() {
 		
 		String linha;
 		ArrayList<String[]> array_rank = new ArrayList<String[]>();
