@@ -12,13 +12,13 @@ public class SoftwareAdministrador {
 	private static IServidorAdministrador oIServidorAdministrador = null; 
 	private static Registry oRegistry = null;
 	private static boolean logado = false;
-	private static String host = "172.16.181.128";
+	private static String host = "localhost";
 	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		SoftwareAdministrador.oRegistry = LocateRegistry.getRegistry(SoftwareAdministrador.host, Registry.REGISTRY_PORT);
 		SoftwareAdministrador.oIServidorAdministrador = (IServidorAdministrador) SoftwareAdministrador.oRegistry.lookup("servidor_administrador");
-		Integer ver = null;
+		int ver = -1;
 		
 		while(true){
 			System.out.println("*** Software Administrador ***");
@@ -29,22 +29,23 @@ public class SoftwareAdministrador {
 				switch(ver){
 					case 1:
 						SoftwareAdministrador.menuConsultarClientes();
-						ver = null;
+						ver = -1;
 						break;
 					case 2:
 						SoftwareAdministrador.menuConsultarCartoes();
-						ver = null;
+						ver = -1;
 						break;
 					case 3:
 						SoftwareAdministrador.menuCadastrarCliente();
-						ver = null;
+						ver = -1;
 						break;
 					case 4:
 						SoftwareAdministrador.menuCadastrarCartao();
-						ver = null;
+						ver = -1;
 						break;
 					case 0:
 						SoftwareAdministrador.logado = false;
+						ver = -1;
 						break;
 					default:
 						ver = SoftwareAdministrador.menuPrincipal();
