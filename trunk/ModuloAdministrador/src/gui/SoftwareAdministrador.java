@@ -12,7 +12,7 @@ public class SoftwareAdministrador {
 	private static IServidorAdministrador oIServidorAdministrador = null; 
 	private static Registry oRegistry = null;
 	private static boolean logado = false;
-	private static String host = "localhost";
+	private static String host = "172.16.181.238";
 	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -97,7 +97,7 @@ public class SoftwareAdministrador {
 	}
 	private static void menuConsultarClientes(){
 		System.out.print("\n1 - Todos");
-		System.out.print("\n1 - Especifico");
+		System.out.print("\n2 - Especifico");
 		System.out.print("Digite: ");
 		String ver = SoftwareAdministrador.oScanner.next();
 		
