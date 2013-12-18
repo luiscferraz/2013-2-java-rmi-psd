@@ -22,8 +22,10 @@ public class SoftwareLojista {
 	private static Registry jRegistry = null;
 	
 	private static boolean logado = false;
-	private static String host = "172.16.181.128";
-	private static Registry oRegistry;
+	private static String servidorCentral = "172.16.181.128";
+	private static String servidorSPC = "172.16.183.68";
+	private static Registry registroCentral;
+	private static Registry registroSPC;
 	private static IServidorLoja oIServidorLoja;
 	private static IServidorConsultaCadastroNegativo oIServidorConsultaCadastroNegativo;
 
@@ -31,13 +33,16 @@ public class SoftwareLojista {
 	public static void main(String[] args) {
 	
 		try{
-			SoftwareLojista.oRegistry = LocateRegistry.getRegistry(SoftwareLojista.host, Registry.REGISTRY_PORT);
-			SoftwareLojista.oIServidorLoja = (IServidorLoja) SoftwareLojista.oRegistry.lookup("servidor_loja");
-			SoftwareLojista.oIServidorConsultaCadastroNegativo = (IServidorConsultaCadastroNegativo) SoftwareLojista.oRegistry.lookup("servidor_consulta_cadastro_negativo");
+			SoftwareLojista.registroCentral = LocateRegistry.getRegistry(SoftwareLojista.servidorCentral, Registry.REGISTRY_PORT);
+			SoftwareLojista.registroSPC = LocateRegistry.getRegistry(SoftwareLojista.servidorSPC, Registry.REGISTRY_PORT);
+			SoftwareLojista.oIServidorLoja = (IServidorLoja) SoftwareLojista.registroCentral.lookup("servidor_loja");
+			SoftwareLojista.oIServidorConsultaCadastroNegativo = (IServidorConsultaCadastroNegativo) SoftwareLojista.registroSPC.lookup("servidor_consulta_cadastro_negativo");
 			Integer ver = null;
+			
 			
 			System.out.println("*** Software Lojista ***");		
 			jRegistry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
+			
 			
 		} catch (Exception e){
 			System.out.println("Problemas ao executar o lookup: " + e.getMessage());
