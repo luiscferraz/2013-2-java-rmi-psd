@@ -1,0 +1,1 @@
+Implementação de um Sistema de Controle de Cartões de Crédito para a disciplina de Projeto de Sistemas Distribuídos da Universidade Federal Rural de Pernambuco.
